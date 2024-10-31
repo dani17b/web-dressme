@@ -1,0 +1,62 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+    --margin-xs: 2px;
+    --margin-s: 4px;
+    --margin-m: 8px;
+    --margin-l: 12px;
+    --margin-xl: 16px;
+    --margin-xxl: 32px;
+    --primary:#55efc4;
+    --secondary: white;
+    --tertiary: yellow;
+    --text-color: #5f5f5f;
+    --text-title-color: #333;
+    --border-color: #D7D7D7;
+    --error-color: #b33939;
+    --success-color: #2ecc71;
+    --warning-color: #f1c40f;
+    --info-color: #3498db;
+    --default-color: #bdc3c7;
+
+    /* SCREEN SIZES */
+    --small-max-width: 414px;
+
+}
+
+/* Firefox */
+* {
+    scrollbar-width: thin;
+    scrollbar-color: #55efc4 white;
+  }
+  
+  /* Chrome, Edge, and Safari */
+  *::-webkit-scrollbar {
+    width: 4px;
+  }
+  
+  *::-webkit-scrollbar-track {
+    background: #55efc4;
+    border-radius: 0px;
+  }
+  
+  *::-webkit-scrollbar-thumb {
+    background-color: #55efc4;
+    border-radius: 0;
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    background-color: #55efc4;
+  }
+
+  html, body, #root {
+    height: 100%;
+    overflow: hidden;
+  }
+
+  div[data-overlay-container]{
+    height: 100%;
+    overflow: auto;
+  }
