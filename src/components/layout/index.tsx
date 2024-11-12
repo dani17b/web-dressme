@@ -99,7 +99,7 @@ export const Layout = (props: any) => {
         </NavbarMenu>
       </Navbar>
       <div className="flex h-max flex-1 items-center flex-col">
-        <div className="flex z-40 max-w-[1024px] w-full h-auto items-center justify-center p-4">
+        <div className="flex z-40 max-w-[1024px] w-full h-full justify-center p-4">
           {props.children}
         </div>
       </div>

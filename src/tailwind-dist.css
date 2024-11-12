@@ -727,6 +727,14 @@ video {
   z-index: 50;
 }
 
+.col-span-3 {
+  grid-column: span 3 / span 3;
+}
+
+.col-span-5 {
+  grid-column: span 5 / span 5;
+}
+
 .-m-2 {
   margin: -0.5rem;
 }
@@ -1021,6 +1029,10 @@ video {
 
 .max-h-\[calc\(100\%_-_7\.5rem\)\] {
   max-height: calc(100% - 7.5rem);
+}
+
+.max-h-fit {
+  max-height: fit-content;
 }
 
 .min-h-10 {
@@ -1572,6 +1584,10 @@ video {
   grid-template-columns: repeat(4, minmax(0, 1fr));
 }
 
+.grid-cols-8 {
+  grid-template-columns: repeat(8, minmax(0, 1fr));
+}
+
 .flex-row {
   flex-direction: row;
 }
@@ -1700,6 +1716,10 @@ video {
 
 .overflow-visible {
   overflow: visible;
+}
+
+.overflow-scroll {
+  overflow: scroll;
 }
 
 .overflow-x-auto {
@@ -2503,6 +2523,11 @@ video {
   line-height: var(--nextui-line-height-medium);
 }
 
+.text-sm {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
+
 .text-small {
   font-size: var(--nextui-font-size-small);
   line-height: var(--nextui-line-height-small);
@@ -2532,6 +2557,10 @@ video {
 
 .font-semibold {
   font-weight: 600;
+}
+
+.capitalize {
+  text-transform: capitalize;
 }
 
 .tabular-nums {
@@ -3535,6 +3564,10 @@ html, body, #root {
 div[data-overlay-container]{
   height: 100%;
   overflow: auto;
+}
+
+.app {
+  height: 100%;
 }
 
 .placeholder\:text-danger::placeholder {

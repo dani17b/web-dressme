@@ -1,3 +1,6 @@
+import { Dresser } from "./pages/dresser";
+import { Home } from "./pages/home";
+
 export interface Route {
   path: string;
   element: JSX.Element;
@@ -16,14 +19,14 @@ export interface Route {
 export const routes: Route[] = [
   {
     path: "/",
-    element: <div>Inicio, poner lo principal</div>,
+    element: <Home />,
     title : "Inicio",
     public: true,
   },
   {
-    path: "/wardoble",
+    path: "/dresser",
     title : "Mi armario",
-    element: <div>Gestionar armario</div>,
+    element: <Dresser />,
     menuLink: {
       name: "Inicio",
       link: "/home",
