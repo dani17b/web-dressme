@@ -33,18 +33,16 @@ export const Home = () => {
         className="grid grid-cols-8 gap-2 h-full"
       >
         <div className="col-span-3 relative">
-            {outfitLoading && (
-                <div className="absolute top-0 left-0 w-full h-full bg-black bg-opacity-50 z-50 flex items-center justify-center">
-                    <Spinner size="md" />
-                </div>
-            )}
-            <Outfit outfit={outfit} />
+            <Outfit outfit={outfit} loading={outfitLoading}/>
         </div>
         <div className="col-span-5 relative">
           
             <Chat
               messages={messages}
+              loading={outfitLoading}
               onSubmit={(content: string) => {
+                setOutfitLoading(true);
+
                 const messageToSend = {
                   user: {
                     ...USERS.user,
@@ -69,15 +67,12 @@ export const Home = () => {
                         content: messageContent.message,
                     };
                     
-                    // TODO analizar el resultado para pintar el outfit que se muestra en la respuesta
+                    // Analizar el resultado para pintar el outfit que se muestra en la respuesta
                     setMessages((prevMessages : Message[]) => [...prevMessages, messageResponse]);
 
-                    // TODO poner a cargar el outfit
                     getArticles(messageContent.articlesKeys).then((articles) => {
-                        console.log(articles);
-
-                        // TODO rehacer la composicion del outfit
                         setOutfit(getOutfit(articles));
+                        setOutfitLoading(false);
                     });
                   },
                 });

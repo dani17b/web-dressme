@@ -1706,6 +1706,12 @@ video {
   margin-left: calc(0.125rem * calc(1 - var(--tw-space-x-reverse)));
 }
 
+.space-x-2 > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-x-reverse: 0;
+  margin-right: calc(0.5rem * var(--tw-space-x-reverse));
+  margin-left: calc(0.5rem * calc(1 - var(--tw-space-x-reverse)));
+}
+
 .self-center {
   align-self: center;
 }
@@ -2120,11 +2126,6 @@ video {
   background-color: hsl(var(--nextui-background) / 0.8);
 }
 
-.bg-black {
-  --tw-bg-opacity: 1;
-  background-color: rgb(51 51 51 / var(--tw-bg-opacity));
-}
-
 .bg-content1 {
   --tw-bg-opacity: 1;
   background-color: hsl(var(--nextui-content1) / var(--nextui-content1-opacity, var(--tw-bg-opacity)));
@@ -2278,8 +2279,8 @@ video {
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
 }
 
-.bg-opacity-50 {
-  --tw-bg-opacity: 0.5;
+.bg-white\/50 {
+  background-color: rgb(255 255 255 / 0.5);
 }
 
 .bg-stripe-gradient {

@@ -1,7 +1,8 @@
-import { Button, Card, CardBody, Textarea } from "@nextui-org/react";
-import { useState } from "react";
+import { Button, Card, CardBody, Spinner, Textarea } from "@nextui-org/react";
+import { useEffect, useRef, useState } from "react";
 import { IoMdSend } from "react-icons/io";
-import Markdown from 'react-markdown';
+import Markdown from "react-markdown";
+import { CiChat1 } from "react-icons/ci";
 
 export enum MessageSide {
   LEFT = "LEFT",
@@ -44,9 +45,13 @@ const ChatItem = (props: ChatItemProps) => {
           </div>
           <p>{message.user.name}</p>
         </div>
-        <div className={`flex flex-col ${message.user.side == MessageSide.RIGHT
+        <div
+          className={`flex flex-col ${
+            message.user.side == MessageSide.RIGHT
               ? "justify-end"
-              : "justify-start"}`}>
+              : "justify-start"
+          }`}
+        >
           <Markdown>{message.content}</Markdown>
         </div>
       </CardBody>
@@ -57,27 +62,56 @@ const ChatItem = (props: ChatItemProps) => {
 interface ChatProps {
   messages: Message[];
   onSubmit: (content: string) => void;
+  loading: boolean;
 }
 
 export const Chat = (props: ChatProps) => {
-  const { messages, onSubmit } = props;
-
+  const { messages, onSubmit, loading } = props;
   const [content, setContent] = useState("");
+  const scrollMessagesRef = useRef(null);
+
+  useEffect(() => {
+    if (!loading) {
+      // Hacer scroll al final
+      // @ts-ignore
+      scrollMessagesRef.current?.scrollTo({
+        // @ts-ignore
+        top: scrollMessagesRef.current?.scrollHeight,
+        behavior: "smooth",
+      });
+    }
+  }, [loading, scrollMessagesRef]);
+
   return (
     <div className="h-full w-full absolute flex flex-col">
-      <div
-        className="overflow-hidden h-full"
-      >
-        <div className="overflow-auto h-full">
+      <div className="overflow-hidden h-full">
+        <div className="overflow-auto h-full" ref={scrollMessagesRef}>
           {messages.map((message, index) => (
             <ChatItem key={index} message={message} />
           ))}
+          {messages.length === 0 && (
+            <div className="flex items-center justify-center h-full flex-col">
+              <CiChat1 size={48} />
+              <p className="mt-2">Empieza a hablar con DressMe</p>
+            </div>
+          )}
         </div>
+        {loading && (
+          <div className="flex items-center justify-center h-full w-full z-50 flex-col absolute top-0 bg-white/50">
+            <Spinner />
+          </div>
+        )}
       </div>
       <div className="flex flex-row">
-        <Textarea label="Description" className="w-full" radius="none" value={content} onChange={(e : any) => {
+        <Textarea
+          label="Description"
+          className="w-full"
+          radius="none"
+          value={content}
+          onChange={(e: any) => {
             setContent(e.target.value);
-        }}/>
+          }}
+        />
         <Button
           onPress={() => {
             setContent("");

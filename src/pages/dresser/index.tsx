@@ -1,6 +1,7 @@
 import {
   Button,
   Chip,
+  Spinner,
   Table,
   TableBody,
   TableCell,
@@ -12,19 +13,22 @@ import { useApi } from "./api";
 import { ArticleEdition } from "./components/articleEdition";
 import { useCallback, useState } from "react";
 import { MdOutlineModeEdit } from "react-icons/md";
-import { CATEGORIES } from "@/const/Categories";
+import { CATEGORIES } from "@/const/CATEGORIES";
 import { SEASONS } from "@/const/SEASONS";
+import { COLORS } from "@/const/COLORS";
+import { CLIMATOLOGIES } from "@/const/CLIMATOLOGIES";
 
 const columns = [
   { name: "", uid: "photoUrl" },
   { name: "Nombre", uid: "name" },
   { name: "Categoría", uid: "category" },
   { name: "Temporada", uid: "season" },
+  { name : "Color", uid : "color"},
+  { name : "Climatologias", uid : "climatologies"},
   { name: "Acciones", uid: "actions" },
 ];
 
 export const Dresser = () => {
-  // <div>dresser : AQUI UN GRID CON EL LISTADO DE PRENDAS QUE TENEMOS Y PONER UNA MODAL CON LA OPCION DE CREAR UNA NUEVA</div>
 
   const { articles, saveArticle } = useApi();
   const [article, setArticle] = useState<any>(null);
@@ -69,6 +73,28 @@ export const Dresser = () => {
             </Chip>
           </div>
         );
+      case "color":
+        return (
+          <div className="flex flex-col">
+            <div
+              className="w-4 h-4 rounded-full"
+              style={{ backgroundColor: COLORS.find((color) => color.value === cellValue)?.color, border: "1px solid #000" }}
+            ></div>
+          </div>
+        );
+      case "climatologies":
+        return (
+          <div className="flex flex-row space-x-2">
+            {cellValue.map((cellValueItem: any) => {
+              const Climatology:any = CLIMATOLOGIES.find((climatology) => climatology.value === cellValueItem)?.icon;
+
+
+              return Climatology;
+            }
+              
+            )}
+          </div>
+        );
       case "actions":
         return (
           <div className="flex flex-col">
@@ -110,7 +136,8 @@ export const Dresser = () => {
             </TableColumn>
           )}
         </TableHeader>
-        <TableBody items={articles.data || []}>
+        <TableBody items={articles.data || []} isLoading={articles.isLoading}
+        loadingContent={<Spinner />}>
           {(item) => (
             <TableRow key={item.key}>
               {(columnKey) => (
@@ -124,14 +151,7 @@ export const Dresser = () => {
         visible={article != null}
         article={article}
         onSave={(article: any) => {
-          console.log("Guardar el articulo Article : ", article);
           saveArticle.mutate(article, {
-            onSuccess: () => {
-              console.log("Articulo guardado correctamente");
-            },
-            onError: (error) => {
-              console.log("Error al guardar el articulo", error);
-            },
           });
         }}
         onClose={() => {

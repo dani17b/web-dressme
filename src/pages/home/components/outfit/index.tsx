@@ -2,6 +2,7 @@ import { Skeleton } from "@nextui-org/react";
 
 interface OutfitProps {
     outfit :  any;
+    loading : boolean;
 }
 
 const OutfitArticle = (props : any) => {
@@ -27,14 +28,15 @@ const OutfitArticle = (props : any) => {
 }
 
 const OutfitRow = (props : any) => {
-    const { outfit } = props;
+    const { outfit, loading } = props;
+
 
     return (
         <div className="flex mb-4">
-            {outfit.length == 0 &&
+            {(outfit.length == 0 || loading) &&
                 <OutfitArticle article={null} />
             }
-            {outfit.map((article: any) => (
+            {!loading && outfit.map((article: any) => (
                 <OutfitArticle article={article} key={article.key}/>
             ))}
         </div>
@@ -44,13 +46,13 @@ const OutfitRow = (props : any) => {
 
 
 export const Outfit = (props : OutfitProps) => {
-    const { outfit } = props;
+    const { outfit, loading } = props;
 
     return (
         <div className="flex flex-col items-center">
-            <OutfitRow outfit={outfit.torso} />
-            <OutfitRow outfit={outfit.legs} />
-            <OutfitRow outfit={outfit.feet} />
+            <OutfitRow outfit={outfit.torso} loading={loading}/>
+            <OutfitRow outfit={outfit.legs} loading={loading}/>
+            <OutfitRow outfit={outfit.feet} loading={loading}/>
         </div>
     );
 

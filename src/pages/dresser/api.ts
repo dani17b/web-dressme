@@ -1,9 +1,10 @@
 import { useDressMeApi } from "@/hooks/useDressMeApi";
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
 export const useApi = () => {
 
   const dressMeApi = useDressMeApi();
+  const queryClient = useQueryClient();
 
   const articles = useQuery({
     queryKey: ["articles"],
@@ -36,6 +37,10 @@ export const useApi = () => {
       });
 
       return saveArticleResponse;
+    },
+    onSuccess: () => {
+      // Invalidate and refetchd
+      queryClient.invalidateQueries({ queryKey: ["articles"] });
     },
   });
 

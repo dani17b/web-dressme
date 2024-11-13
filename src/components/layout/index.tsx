@@ -62,7 +62,7 @@ export const Layout = (props: any) => {
           >
             <NavbarBrand>
               <div className="font-bold text-inherit flex items-center">
-                <img src="/logo_small.png" alt="DressMe" className="h-8" />
+                DressME
               </div>
             </NavbarBrand>
           </Link>

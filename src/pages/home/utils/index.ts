@@ -1,4 +1,4 @@
-import { Article, ArticleResponse } from "@/clients/dressme/src";
+import { ArticleResponse } from "@/clients/dressme/src";
 
 export const processMessage = (messageContent: string) => {
   const searchStrOpen = "<!--";

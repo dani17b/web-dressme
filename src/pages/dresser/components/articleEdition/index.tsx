@@ -1,4 +1,6 @@
-import { CATEGORIES } from "@/const/Categories";
+import { CATEGORIES } from "@/const/CATEGORIES";
+import { CLIMATOLOGIES } from "@/const/CLIMATOLOGIES";
+import { COLORS } from "@/const/COLORS";
 import { SEASONS } from "@/const/SEASONS";
 import {
   Button,
@@ -20,30 +22,6 @@ interface ArticleEditionProps {
   onClose: () => void;
   article : any;
 }
-
-// TODO todo esto de base de datos
-
-const COLORS = [
-  {
-    value: "1",
-    label: "Blanco",
-  },
-  {
-    value: "2",
-    label: "Negro",
-  },
-];
-
-const CLIMATOLOGIES = [
-  {
-    value: "1",
-    label: "Dia lluvioso",
-  },
-  {
-    value: "2",
-    label: "Dia calido",
-  },
-];
 
 export const ArticleEdition = (props: ArticleEditionProps) => {
   const { visible, onSave } = props;
