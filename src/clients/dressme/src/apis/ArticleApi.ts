@@ -29,6 +29,10 @@ export interface CreateArticleRequest {
     article: Article;
 }
 
+export interface GetArticlesRequest {
+    keys?: Array<string>;
+}
+
 export interface UpdateArticleRequest {
     article: Article;
 }
@@ -55,15 +59,16 @@ export interface ArticleApiInterface {
 
     /**
      * 
+     * @param {Array<string>} [keys] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ArticleApiInterface
      */
-    getArticlesRaw(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Array<ArticleResponse>>>;
+    getArticlesRaw(requestParameters: GetArticlesRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Array<ArticleResponse>>>;
 
     /**
      */
-    getArticles(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Array<ArticleResponse>>;
+    getArticles(requestParameters: GetArticlesRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Array<ArticleResponse>>;
 
     /**
      * 
@@ -121,8 +126,12 @@ export class ArticleApi extends runtime.BaseAPI implements ArticleApiInterface {
 
     /**
      */
-    async getArticlesRaw(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Array<ArticleResponse>>> {
+    async getArticlesRaw(requestParameters: GetArticlesRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Array<ArticleResponse>>> {
         const queryParameters: any = {};
+
+        if (requestParameters['keys'] != null) {
+            queryParameters['keys'] = requestParameters['keys'];
+        }
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -138,8 +147,8 @@ export class ArticleApi extends runtime.BaseAPI implements ArticleApiInterface {
 
     /**
      */
-    async getArticles(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Array<ArticleResponse>> {
-        const response = await this.getArticlesRaw(initOverrides);
+    async getArticles(requestParameters: GetArticlesRequest = {}, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Array<ArticleResponse>> {
+        const response = await this.getArticlesRaw(requestParameters, initOverrides);
         return await response.value();
     }
 

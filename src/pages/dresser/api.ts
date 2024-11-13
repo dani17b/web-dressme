@@ -9,7 +9,7 @@ export const useApi = () => {
     queryKey: ["articles"],
     enabled: dressMeApi.initialized,
     queryFn: async () => {
-      const articlesResponse = await dressMeApi.article?.getArticles();
+      const articlesResponse = await dressMeApi.article?.getArticles({});
 
       return articlesResponse;
     },

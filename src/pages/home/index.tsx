@@ -5,14 +5,16 @@ import { Chat, Message, MessageSide } from "./components/chat";
 import { useState } from "react";
 import { USERS } from "@/const/Users";
 import { QueryResponse } from "@/clients/dressme/src";
-import { processMessage } from "./utils";
+import { getOutfit, processMessage } from "./utils";
+import { Outfit } from "./components/outfit";
 
 export const Home = () => {
-  const { executeQuery } = useApi();
+  const { executeQuery, getArticles } = useApi();
   const navigate = useNavigate();
 
   const [messages, setMessages] = useState<Message[]>([]);
-  const [outfitLoading, setOutfitLoading] = useState(true);
+  const [outfitLoading, setOutfitLoading] = useState(false);
+  const [outfit, setOutfit] = useState<any>(getOutfit([]));
 
   return (
     <div className="w-full h-full flex flex-col">
@@ -28,9 +30,6 @@ export const Home = () => {
         </Button>
       </div>
       <div
-        style={{
-          backgroundColor: "red",
-        }}
         className="grid grid-cols-8 gap-2 h-full"
       >
         <div className="col-span-3 relative">
@@ -39,15 +38,10 @@ export const Home = () => {
                     <Spinner size="md" />
                 </div>
             )}
-            Contenido con la sugerencia de outfit
+            <Outfit outfit={outfit} />
         </div>
-        <div className="col-span-5 h-full">
-          <div
-            className="w-full h-full"
-            style={{
-              backgroundColor: "green",
-            }}
-          >
+        <div className="col-span-5 relative">
+          
             <Chat
               messages={messages}
               onSubmit={(content: string) => {
@@ -79,14 +73,16 @@ export const Home = () => {
                     setMessages((prevMessages : Message[]) => [...prevMessages, messageResponse]);
 
                     // TODO poner a cargar el outfit
-                    debugger;
-                    // TODO hacer una peticion a los articulos correspondientes
-                    // TODO componer la vista
+                    getArticles(messageContent.articlesKeys).then((articles) => {
+                        console.log(articles);
+
+                        // TODO rehacer la composicion del outfit
+                        setOutfit(getOutfit(articles));
+                    });
                   },
                 });
               }}
             />
-          </div>
         </div>
       </div>
     </div>

@@ -1,3 +1,5 @@
+import { Article, ArticleResponse } from "@/clients/dressme/src";
+
 export const processMessage = (messageContent: string) => {
   const searchStrOpen = "<!--";
   const indexesOpen = [
@@ -34,3 +36,18 @@ export const processMessage = (messageContent: string) => {
     articlesKeys,
   };
 };
+
+export const getOutfit = (articles : ArticleResponse[] | undefined) => {
+    const TORSO_CATEGORIES = ['t-shirt'];
+    const LEGS_CATEGORIES = ['pants'];
+    const FEET_CATEGORIES = ['shoes'];
+
+    // Hay 3 partes en un outfit, torso, que puede tener 2 piezas piernas que puede tener 1 pieza y zapatos que puede tener 1 pieza
+    const outfit = {
+        torso : articles?.filter((article : ArticleResponse) => TORSO_CATEGORIES.indexOf(article.category) != -1),
+        legs : articles?.filter((article : ArticleResponse) => LEGS_CATEGORIES.indexOf(article.category) != -1),
+        feet : articles?.filter((article : ArticleResponse) => FEET_CATEGORIES.indexOf(article.category) != -1),
+    };
+
+    return outfit;
+}

@@ -64,115 +64,14 @@ export const Chat = (props: ChatProps) => {
 
   const [content, setContent] = useState("");
   return (
-    <div className="h-full flex flex-col" style={{ backgroundColor: "orange" }}>
+    <div className="h-full w-full absolute flex flex-col">
       <div
         className="overflow-hidden h-full"
-        style={{ backgroundColor: "blue" }}
       >
-        <div className="overflow-scroll max-h-fit h-full">
+        <div className="overflow-auto h-full">
           {messages.map((message, index) => (
             <ChatItem key={index} message={message} />
           ))}
-          {/* <ChatItem
-            message={{
-              user: {
-                ...USERS.user,
-                side: MessageSide.RIGHT,
-              },
-              content: "Hola",
-            }}
-          />
-          <ChatItem
-            message={{
-              user: {
-                ...USERS.bot,
-                side: MessageSide.LEFT,
-              },
-              content: "Hola",
-            }}
-          />
-          <ChatItem
-            message={{
-              user: {
-                ...USERS.bot,
-                side: MessageSide.LEFT,
-              },
-              content: "Hola",
-            }}
-          />
-          <ChatItem
-            message={{
-              user: {
-                ...USERS.user,
-                side: MessageSide.RIGHT,
-              },
-              content: "Hola",
-            }}
-          />
-
-          <ChatItem
-            message={{
-              user: {
-                ...USERS.user,
-                side: MessageSide.RIGHT,
-              },
-              content: "Hola",
-            }}
-          />
-          <ChatItem
-            message={{
-              user: {
-                ...USERS.user,
-                side: MessageSide.RIGHT,
-              },
-              content: "Hola",
-            }}
-          />
-          <ChatItem
-            message={{
-              user: {
-                ...USERS.user,
-                side: MessageSide.RIGHT,
-              },
-              content: "Hola",
-            }}
-          />
-          <ChatItem
-            message={{
-              user: {
-                ...USERS.user,
-                side: MessageSide.RIGHT,
-              },
-              content: "Hola",
-            }}
-          />
-          <ChatItem
-            message={{
-              user: {
-                ...USERS.user,
-                side: MessageSide.RIGHT,
-              },
-              content: "Hola",
-            }}
-          />
-          <ChatItem
-            message={{
-              user: {
-                ...USERS.user,
-                side: MessageSide.RIGHT,
-              },
-              content: "Hola",
-            }}
-          />
-          <ChatItem
-            message={{
-              user: {
-                ...USERS.user,
-                side: MessageSide.RIGHT,
-              },
-              content: "Hola",
-            }}
-          /> */}
         </div>
       </div>
       <div className="flex flex-row">

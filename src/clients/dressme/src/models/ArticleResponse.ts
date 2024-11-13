@@ -43,6 +43,24 @@ export interface ArticleResponse {
      * @memberof ArticleResponse
      */
     category: string;
+    /**
+     * The article color
+     * @type {string}
+     * @memberof ArticleResponse
+     */
+    color: string;
+    /**
+     * The article season
+     * @type {string}
+     * @memberof ArticleResponse
+     */
+    season: string;
+    /**
+     * The article climatologies
+     * @type {Array<string>}
+     * @memberof ArticleResponse
+     */
+    climatologies: Array<string>;
 }
 
 /**
@@ -53,6 +71,9 @@ export function instanceOfArticleResponse(value: object): value is ArticleRespon
     if (!('key' in value) || value['key'] === undefined) return false;
     if (!('photoUrl' in value) || value['photoUrl'] === undefined) return false;
     if (!('category' in value) || value['category'] === undefined) return false;
+    if (!('color' in value) || value['color'] === undefined) return false;
+    if (!('season' in value) || value['season'] === undefined) return false;
+    if (!('climatologies' in value) || value['climatologies'] === undefined) return false;
     return true;
 }
 
@@ -70,6 +91,9 @@ export function ArticleResponseFromJSONTyped(json: any, ignoreDiscriminator: boo
         'key': json['key'],
         'photoUrl': json['photoUrl'],
         'category': json['category'],
+        'color': json['color'],
+        'season': json['season'],
+        'climatologies': json['climatologies'],
     };
 }
 
@@ -88,6 +112,9 @@ export function ArticleResponseFromJSONTyped(json: any, ignoreDiscriminator: boo
         'key': value['key'],
         'photoUrl': value['photoUrl'],
         'category': value['category'],
+        'color': value['color'],
+        'season': value['season'],
+        'climatologies': value['climatologies'],
     };
 }
 

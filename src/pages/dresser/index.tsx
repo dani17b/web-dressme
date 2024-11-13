@@ -1,5 +1,6 @@
 import {
   Button,
+  Chip,
   Table,
   TableBody,
   TableCell,
@@ -11,12 +12,14 @@ import { useApi } from "./api";
 import { ArticleEdition } from "./components/articleEdition";
 import { useCallback, useState } from "react";
 import { MdOutlineModeEdit } from "react-icons/md";
+import { CATEGORIES } from "@/const/Categories";
+import { SEASONS } from "@/const/SEASONS";
 
 const columns = [
   { name: "", uid: "photoUrl" },
   { name: "Nombre", uid: "name" },
-  { name: "ROLE", uid: "role" },
-  { name: "STATUS", uid: "status" },
+  { name: "Categoría", uid: "category" },
+  { name: "Temporada", uid: "season" },
   { name: "Acciones", uid: "actions" },
 ];
 
@@ -36,6 +39,7 @@ export const Dresser = () => {
             <img
               src={cellValue}
               alt={article.name}
+              className="object-cover"
               style={{
                 width: "80px",
                 height: "80px",
@@ -47,6 +51,22 @@ export const Dresser = () => {
         return (
           <div className="flex flex-col">
             <p className="text-bold text-sm capitalize">{cellValue}</p>
+          </div>
+        );
+      case "category":
+        return (
+          <div className="flex flex-col">
+            <Chip className="capitalize" radius="none">
+              {CATEGORIES.find((category) => category.value === cellValue)?.label}
+            </Chip>
+          </div>
+        );
+      case "season":
+        return (
+          <div className="flex flex-col">
+            <Chip className="capitalize" radius="none">
+              {SEASONS.find((season) => season.value === cellValue)?.label}
+            </Chip>
           </div>
         );
       case "actions":

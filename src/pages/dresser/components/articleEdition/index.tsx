@@ -1,3 +1,5 @@
+import { CATEGORIES } from "@/const/Categories";
+import { SEASONS } from "@/const/SEASONS";
 import {
   Button,
   Input,
@@ -10,7 +12,6 @@ import {
   SelectItem,
   useDisclosure,
 } from "@nextui-org/react";
-import { set } from "lodash";
 import { useEffect, useState } from "react";
 
 interface ArticleEditionProps {
@@ -21,28 +22,6 @@ interface ArticleEditionProps {
 }
 
 // TODO todo esto de base de datos
-const CATEGORIES = [
-  {
-    value: "t-shirt",
-    label: "Camiseta",
-  },
-  {
-    value: "pants",
-    label: "Pantalón",
-  },
-  {
-    value: "dress",
-    label: "Vestido",
-  },
-  {
-    value: "jacket",
-    label: "Chaqueta",
-  },
-  {
-    value: "shoes",
-    label: "Zapatos",
-  },
-];
 
 const COLORS = [
   {
@@ -52,25 +31,6 @@ const COLORS = [
   {
     value: "2",
     label: "Negro",
-  },
-];
-
-const SEASONS = [
-  {
-    value: "1",
-    label: "Verano",
-  },
-  {
-    value: "2",
-    label: "Otoño",
-  },
-  {
-    value: "3",
-    label: "Primavera",
-  },
-  {
-    value: "4",
-    label: "Invierno",
   },
 ];
 

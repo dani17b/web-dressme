@@ -22,7 +22,14 @@ export const useApi = () => {
     },
   });
 
+  const getArticles = async (keys : string[]) => {
+      return await dressMeApi.article?.getArticles({
+        keys
+      });
+  }
+
   return {
     executeQuery,
+    getArticles
   };
 };
